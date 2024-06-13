@@ -7,9 +7,9 @@ The Jetson Nano computes the course to the next waypoint and communicates that i
 https://www.elcanoproject.org/wiki/Communication
 
 # Overview
-Jetson Nano: The Jetson Nano is a small, powerful computer made by Nvidia designed for artificial intelligence (AI) and embedded applications at the edge of a network. In simpler terms, it's a tiny computer with a lot of processing power specifically suited for running AI tasks on devices, rather than relying on a connection to the cloud for processing.
+Jetson Nano: The Jetson Nano is a small, powerful computer made by Nvidia designed for artificial intelligence (AI) and embedded applications as edge computing. In simpler terms, it's a tiny computer with a lot of processing power specifically suited for running AI tasks on devices, rather than relying on a connection to the cloud for processing.
 
-Pixhawk: Pixhawk is an open-source hardware project that designs and produces flight controllers for drones and other unmanned aerial vehicles (UAVs). It provides the hardware and software needed to control and navigate these devices, integrating sensors, communication modules, and processors to ensure stable flight and autonomous operations.
+Pixhawk: Pixhawk is an open-source hardware and software project that designs and produces flight controllers for drones, other unmanned aerial vehicles (UAVs) as well as rovers on land and water. It provides the hardware and software needed to control and navigate these devices, integrating sensors, communication modules, and processors to ensure stable flight and autonomous operations. It depends on an external GNSS reciever.
 
 In this project, the Pixhawk serves as a device that retrieves data to be processed by the Jetson Nano. The specific data obtained includes:
 1. Pitch: Pitch refers to the rotation around the lateral (side-to-side) axis of the vehicle.
@@ -17,6 +17,7 @@ In this project, the Pixhawk serves as a device that retrieves data to be proces
 3. Yaw: Yaw refers to the rotation around the vertical (up-and-down) axis of the vehicle.
 4. Longitude
 5. Latitude
+6. Velocity
 
 To execute this project, you'll need several Python libraries, including:
 1. pymavlink: Install this on your computer if you haven't already by running `pip install pymavlink`
@@ -34,6 +35,8 @@ To execute this project, you'll need several Python libraries, including:
 1. Connect the Jetson Nano and Pixhawk:
   1. Use the USB cable to connect the Jetson Nano to the Pixhawk.
   2. By default, the listening port is set to TTYACM0.
+  3. Connect cable from Pixhawk GPS port to GNSS device.
+  4. Connect cable from Pixhawk I2C port to GNSS device.
 2. Navigate to the repository:
   1. `cd path/to/your/desired/directory`
 3. Execute the Script: `python Car_works_5_29_24.py`
