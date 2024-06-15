@@ -1,4 +1,4 @@
-# 5/29/2024 Car_works_5_29_24.py
+# 6/14/2024 Car_works_5_29_24.py
 # Version: Python 3.6; run in terminal of Jet-nano(code python3 Car.py; depend on the file path)
 
 # Import necessary libraries: pymavlink for MAVLink communication, time for delays, math for mathematical operations
@@ -13,7 +13,7 @@ def setup_connection():
 
     # Establish a connection to the Pixhawk on a specific ACMO port with a set baud rate
     # Update this line with the correct ACMO port from Jetnano (change to different USB port, might be change code)
-    connection = mavutil.mavlink_connection('/dev/ttyACM0', baud=9600)
+    connection = mavutil.mavlink_connection('COM4', baud=9600)
 
     # Inform the user that the script is waiting for a heartbeat message to confirm the connection
     print("Waiting for heartbeat...")
@@ -37,10 +37,21 @@ def setup_connection():
     # Return the connection object to be used for data fetching
     return connection
 
+# Function to convert the latitude and longitude to x and y in meters
+def convert_lat_long(latitudeOrigin, longitudeOrigin, latitudeDest, longitudeDest):
+    EarthRadius = 6378000
+    x = EarthRadius * (longitudeDest - longitudeOrigin) * math.pi / (180 * math.cos(latitudeOrigin * math.pi / 180))
+    y = EarthRadius * (latitudeDest - latitudeOrigin) * math.pi / 180
+
+    return x, y
 
 def main():
     # Initialize the connection and assign it to a variable
     master = setup_connection()
+
+    # Variables to store the initial and current GPS coordinates
+    initial_lat = None
+    initial_lon = None
 
     # Main loop to continuously fetch data
     while True:
@@ -67,11 +78,23 @@ def main():
             # Check if GPS data was received and it has a valid fix
             if gps_message and gps_message.fix_type >= 2:
                 # Convert the latitude and longitude from 1E7 scaled integers to float degrees
-                lat = gps_message.lat / 1e7
-                lon = gps_message.lon / 1e7
+                current_lat = gps_message.lat
+                current_lon = gps_message.lon
+
+                 # Set the initial coordinates if they are not already set
+                if initial_lat is None and initial_lon is None:
+                    initial_lat = current_lat
+                    initial_lon = current_lon
 
                 # Print the formatted GPS data
-                print(f"Latitude: {lat}, Longitude: {lon}, GPS Fix Type: {gps_message.fix_type}")
+                print(f"Latitude: {current_lat / 1e7}, Longitude: {current_lon / 1e7}, GPS Fix Type: {gps_message.fix_type}")
+
+                # Calculate and print distance traveled from the initial coordinates
+                if initial_lat is not None and initial_lon is not None:
+                    x, y = convert_lat_long(initial_lat, initial_lon, current_lat, current_lon)
+                    print(f"Distance from origin: x = {x:.2f} meters, y = {y:.2f} meters")
+                
+
             else:
                 # Notify if no GPS data was received or the fix was invalid
                 print("No GPS data received or no valid fix.")
@@ -88,7 +111,7 @@ def main():
             master = setup_connection()
 
         # Insert a short delay to reduce the load on the CPU and prevent flooding with data
-        time.sleep(0.1)
+        time.sleep(3)
 
 
 # Ensure the script runs only if it is executed directly, not when imported as a module
