@@ -1,5 +1,4 @@
-# 6/
-# /2024 Car_works_5_29_24.py
+# 6/15/2024 Car_works_5_29_24.py
 # Version: Python 3.6; run in terminal of Jet-nano(code python3 Car.py; depend on the file path)
 
 # Import necessary libraries: pymavlink for MAVLink communication, time for delays, math for mathematical operations
@@ -40,7 +39,7 @@ def setup_connection():
 
 # Function to convert the latitude and longitude to x and y in meters
 def convert_lat_long(latitudeOrigin, longitudeOrigin, latitudeDest, longitudeDest):
-    EarthRadius = 6378000
+    EarthRadius = 6378
     x = EarthRadius * (longitudeDest - longitudeOrigin) * math.pi / (180 * math.cos(latitudeOrigin * math.pi / 180))
     y = EarthRadius * (latitudeDest - latitudeOrigin) * math.pi / 180
 
