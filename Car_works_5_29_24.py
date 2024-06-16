@@ -1,4 +1,5 @@
-# 6/14/2024 Car_works_5_29_24.py
+# 6/
+# /2024 Car_works_5_29_24.py
 # Version: Python 3.6; run in terminal of Jet-nano(code python3 Car.py; depend on the file path)
 
 # Import necessary libraries: pymavlink for MAVLink communication, time for delays, math for mathematical operations
@@ -91,7 +92,7 @@ def main():
 
                 # Calculate and print distance traveled from the initial coordinates
                 if initial_lat is not None and initial_lon is not None:
-                    x, y = convert_lat_long(initial_lat, initial_lon, current_lat, current_lon)
+                    x, y = convert_lat_long(initial_lat / 1e7, initial_lon / 1e7, current_lat / 1e7, current_lon / 1e7)
                     print(f"Distance from origin: x = {x:.2f} meters, y = {y:.2f} meters")
                 
 
