@@ -39,7 +39,7 @@ To execute this project, you'll need several Python libraries, including:
   4. Connect cable from Pixhawk I2C port to GNSS device.
 2. Navigate to the repository:
   1. `cd path/to/your/desired/directory`
-3. Execute the Script: `python Car_works_5_29_24.py`
+3. Execute the Script: `python3 Car_works_5_29_24.py`
 
 ## Running without Jetson Nano
 1. Connect the Pixhawk: Use the USB cable to connect the Pixhawk to your computer.
@@ -52,7 +52,7 @@ To execute this project, you'll need several Python libraries, including:
   3. Replace 'TTYACM0' with the identified port name (e.g., COM3)
 4. Navigate to the repository:
   1. `cd path/to/your/desired/directory`
-5. Execute the Script: `python Car_works_5_29_24.py`
+5. Execute the Script: `python3 Car_works_5_29_24.py`
 
 
 
