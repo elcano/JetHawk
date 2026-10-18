@@ -6,6 +6,9 @@ June 12th, 2024
 The Jetson Nano computes the course to the next waypoint and communicates that information over a CAN link to the Drive-By-Wire computer.
 https://www.elcanoproject.org/wiki/Communication
 
+## Jetson Nano CAN waypoint navigation
+[`Jetson_Navigate/`](Jetson_Navigate) contains the Jetson Nano navigation node that drives the [V5 Drive-by-Wire](https://github.com/elcano/V5_Drive-by-wire) firmware over CAN. See its [README](Jetson_Navigate/README.md) for setup and the requirements for using Pixhawk data on the real trike.
+
 # Overview
 Jetson Nano: The Jetson Nano is a small, powerful computer made by Nvidia designed for artificial intelligence (AI) and embedded applications as edge computing. In simpler terms, it's a tiny computer with a lot of processing power specifically suited for running AI tasks on devices, rather than relying on a connection to the cloud for processing.
 
